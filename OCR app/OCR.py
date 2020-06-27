@@ -96,14 +96,15 @@ def warpImage ():
 
 
 def getText ():
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
     global cropped
     global img
     global text
 
     if cropped.size > 1:
-        croppedGrey = cv2.cvtColor(cropped, cv2.COLOR_BGR2GRAY)
+        croppedGrey = cv2.cvtColor (cropped, cv2.COLOR_BGR2GRAY)
     else:
-        croppedGrey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        croppedGrey = cv2.cvtColor (img, cv2.COLOR_BGR2GRAY)
 
     thresh = cv2.adaptiveThreshold (croppedGrey, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 201, 35)
     textFound = pytesseract.image_to_string(img, lang = 'eng')
@@ -117,6 +118,7 @@ def getText ():
 
 def showText ():
     global cropped
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
     croppedGrey = cv2.cvtColor (cropped, cv2.COLOR_BGR2GRAY)
     thresh = cv2.adaptiveThreshold (croppedGrey, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 201, 35)
@@ -135,7 +137,7 @@ def showText ():
 def displayImage():
     global display
 
-    
+    # print ('Yea hi! I displayed something')
     cv2.namedWindow ('image modified', cv2.WINDOW_NORMAL)
     cv2.imshow ('image modified', display)
 
